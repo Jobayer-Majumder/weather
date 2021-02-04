@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Temperature Hot</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url(images/bg-image.jpg) no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form class="col-md-6 m-auto py-5">
+            <div class="input-group mb-3">
+                <input id="input" type="text" class="form-control" placeholder="Enter a location for Weather ...">
+                <div class="input-group-append">
+                    <button id="btn" type="button" class="btn btn-danger">Search</button>
+                </div>
+            </div>
+        </form>
+        <div class="weather-status text-white text-center">
+            <img id="icon" src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
+            <h1 id="city-name">City</h1>
+            <h3><span id="temp">Temperature</span>&deg;C</h3>
+            <h1 id="description" class="lead">Weather</h1>
+        </div>
+    </div>
+
+    <script>
+        const dataUrl = 'http://api.openweathermap.org/data/2.5/weather?q=';
+        const apiKey = '&appid=f9891293a159912f5042a85522619c88';
+
+
+        document.getElementById('btn').addEventListener('click', function () {
+            const input = document.getElementById('input').value;
+            getWeather(input)
+        })
+
+
+        const getWeather = (city) => {
+            const generateUrl = `${dataUrl}${city}${apiKey}`;
+            fetch(generateUrl)
+                .then(response => response.json())
+                .then(weather => display(weather))
+        }
+
+        const display = weather => {
+            document.getElementById('icon').setAttribute('src', `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`);
+            const cityName = document.getElementById('city-name');
+            cityName.innerText = weather.name;
+            const temp = document.getElementById('temp');
+            temp.innerText = weather.main.temp;
+            temp.style.color = 'yellow'
+            const description = document.getElementById('description');
+            description.innerText =  weather.weather[0].main;
+            document.getElementById('input').value = '';
+        }
+
+        
+
+    </script>
+</body>
+
+</html>
