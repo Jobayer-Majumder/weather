@@ -55,6 +55,7 @@
         }
 
         const display = weather => {
+            document.getElementById('icon').setAttribute('src', `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`);
             const cityName = document.getElementById('city-name');
             cityName.innerText = weather.name;
             const temp = document.getElementById('temp');
