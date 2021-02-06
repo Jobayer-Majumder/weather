@@ -31,12 +31,18 @@
         <div class="weather-status text-white text-center">
             <img id="icon" src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
             <h1 id="city-name">City</h1>
+            <h2>( <span id="country">Country</span> )</h2>
             <h3><span id="temp">Temperature</span>&deg;C</h3>
             <h1 id="description" class="lead">Weather</h1>
+            <h2>Time Zone  <span id="time">00:00</span></h2>
         </div>
     </div>
 
     <script>
+        // fetch('https://api.openweathermap.org/data/2.5/weather?q=dhaka&appid=f9891293a159912f5042a85522619c88&units=metric')
+        // .then(es => es.json())
+        // .then(data => console.log(data))
+
         const dataUrl = 'https://api.openweathermap.org/data/2.5/weather?q=';
         const apiKey = '&appid=f9891293a159912f5042a85522619c88&units=metric ';
 
@@ -58,10 +64,14 @@
             document.getElementById('icon').setAttribute('src', `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`);
             const cityName = document.getElementById('city-name');
             cityName.innerText = weather.name;
+            const country = document.getElementById('country');
+            country.innerText = weather.sys.country;
             const temp = document.getElementById('temp');
             temp.innerText = weather.main.temp;
             temp.style.color = 'yellow'
             const description = document.getElementById('description');
+            const time = document.getElementById('time');
+            time.innerText = weather.timezone;
             description.innerText =  weather.weather[0].main;
             document.getElementById('input').value = '';
         }
