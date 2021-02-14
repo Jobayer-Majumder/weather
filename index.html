@@ -34,7 +34,6 @@
             <h2>( <span id="country">Country</span> )</h2>
             <h3><span id="temp">Temperature</span>&deg;C</h3>
             <h1 id="description" class="lead">Weather</h1>
-            <h2>Time Zone  <span id="time">00:00</span></h2>
         </div>
     </div>
 
@@ -70,8 +69,6 @@
             temp.innerText = weather.main.temp;
             temp.style.color = 'yellow'
             const description = document.getElementById('description');
-            const time = document.getElementById('time');
-            time.innerText = weather.timezone;
             description.innerText =  weather.weather[0].main;
             document.getElementById('input').value = '';
         }
